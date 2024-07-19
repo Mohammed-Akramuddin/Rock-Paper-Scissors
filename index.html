@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="styles/style.css"/>
+  <title>Rock-Paper-Scissors</title>
+  <style>
+  *{
+    margin:0;
+    padding:0;
+  }
+  body{
+    text-align:center;
+    background-color:#082D0F;
+  }
+  header{
+    color:#FF01FB;
+    height:10rem:
+    line-height:5rem;
+    font-size:5rem;
+    font-family:serif;
+    text-decoration:underline;
+    text-decoration-style:wavy;
+    text-decoration-color:orange;
+  }
+  .container{
+    height:50vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+  .game{
+    height:30vmin;
+    width:80vmin;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:2rem;
+  }
+  .choice{
+    height:25vmin;
+    width:25vmin;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:50%;
+    cursor:pointer;
+  }
+  .choice:hover{
+    background-color:yellow;
+  }
+  img{
+    height:20vmin;
+    width:20vmin;
+    border-radius:50%;
+    object-fit:cover;
+    object-fit:cover
+  }
+  footer{
+    display:flex;
+    justify-content:center;
+    gap:2.5rem;
+    color:blue;
+    font-size:3rem;
+  }
+  .msg{
+    font-family:serif;
+    font-style:italic;
+    font-size:5rem;
+    line-height:5rem;
+    color:indigo;
+    background-color:orange;
+    padding:10px;
+    display:inline;
+  }
+  </style>
+</head>
+<body>
+  <header>
+  <h1>
+    Rock-Paper-Scissors
+  </h1>
+  </header>
+  <div class="container">
+    <div class="game">
+      <div class="choice" id="Rock">
+        <img src="rock.png">
+      </div>
+     <div class="choice" id="Paper">
+        <img src="Paper.jpeg">
+      </div>
+     <div class="choice" id="Scissors">
+        <img src="Scissors.jpeg">
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="You">
+      <p style="font-size:5rem" id="s1">0</p>
+      <p>You</p>
+    </div>
+    <div class="Com">
+      <p style="font-size:5rem" id="s2">0</p>
+      <p>Com</p>
+    </div>
+  </footer>
+  <br>
+  <br>
+  <p class="msg">Start Your game</p>
+  <script>
+  let choices=document.querySelectorAll(".choice");
+  let mg=document.querySelector(".msg");
+  let sas=document.querySelector("#s1");
+  let sos=document.querySelector("#s2");
+  let comp=()=>{
+    let ar=["Rock","Paper","Scissors"];
+    let co=Math.floor(Math.random()*3);
+    return ar[co];
+  }
+  let draw=()=>{
+    mg.innerText="It's a draw play again";
+    mg.style.backgroundColor="yellow";
+  }
+  let us=0;
+  let cs=0;
+  let declare=(userw,userc,comc)=>{
+    if(userw){
+      console.log("You Win");
+      us++;
+      sas.innerText=us;
+      mg.innerText=`Your ${userc} beats ${comc}`;
+      mg.style.backgroundColor="green";
+    }
+    else{
+      console.log("You lost");
+      cs++;
+      sos.innerText=cs;
+      mg.innerText=`${comc} beats Your ${userc}`;
+      mg.style.backgroundColor="red";
+    }
+  }
+  choices.forEach((x)=>{
+    x.addEventListener("click",()=>{
+      let userc=x.getAttribute("id");
+      let comc=comp();
+      console.log(userc,comc);;
+      if(userc===comc){
+        draw();
+      }
+      else{ 
+      if(userc==="Rock"){
+          userw=comc==="Paper"?false:true;
+      }else if(userc==="Paper"){
+          userw=comc=="Scissors"?false:true;
+      }else if(userc==="Scissors"){
+          userw=comc=="Rock"?false:true;
+      }
+      declare(userw,userc,comc); 
+      }        
+    });
+  });
+  </script>
+</body>
+</html>
